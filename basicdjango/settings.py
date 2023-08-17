@@ -25,8 +25,16 @@ SECRET_KEY = 'django-insecure-q3k@@pq1*fp)hvnhu45edqn%akh&%kqg5$+2qio-w!!jl_wwoe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+
+# CORS_ORIGIN_ALLOW = True
+
+# CORS_ORIGIN_WHITELIST = (
+#   'http://localhost:3000',
+# )
+# localhost host working in this list
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000","http://localhost:5200","http://127.0.0.1:5200"]
 
 # Application definition
 
@@ -37,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # cors 
+    'corsheaders',
+    'rest_framework',
     'playground'
 
     # third party apps
@@ -45,8 +56,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # cors
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware', # cors
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -128,3 +141,14 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# ##################################################################### #
+#  CORS 
+# ##################################################################### #
+
+# CORS_ALLOW_ALL_ORIGINS=True
+
+# Load the default ones
+# CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
